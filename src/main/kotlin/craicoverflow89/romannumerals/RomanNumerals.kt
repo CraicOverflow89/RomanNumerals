@@ -4,14 +4,14 @@ class RomanNumerals {
 
     companion object {
 
-        fun parseInt(value: Int): String = StringBuffer().apply {
+        fun parseInt(input: Int): String = StringBuffer().apply {
 
             // Define Remainder
-            var remainder = value
+            var remainder = input
 
             // Handle Thousands
             (
-                if(value >= 1000) {
+                if(remainder >= 1000) {
                     val result = remainder / 1000
                     remainder -= result * 1000
                     result
@@ -39,7 +39,7 @@ class RomanNumerals {
 
             // Handle Hundreds
             (
-                if(value >= 100) {
+                if(remainder >= 100) {
                     val result = remainder / 100
                     remainder -= result * 100
                     result
@@ -67,7 +67,7 @@ class RomanNumerals {
 
             // Handle Tens
             (
-                if(value >= 10) {
+                if(remainder >= 10) {
                     val result = remainder / 10
                     remainder -= result * 10
                     result
@@ -104,6 +104,13 @@ class RomanNumerals {
 
     }
 
-    fun parseNumeral(input: String) = 0
+    fun parseNumeral(input: String): Int {
+
+        // Validate Tokens
+        if("^[MDCLXVI]+\$".toRegex().find(input) == null) throw Exception("Input char string is invalid!")
+
+        // TEMP
+        return 0
+    }
 
 }
