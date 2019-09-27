@@ -29,43 +29,41 @@ class RomanNumerals {
                 else 0
             ).let {
 
-                // Remainder 100
+                // Remainder Hundreds
                 var resultC = it
 
-                // Prepend 500
-                var prependD = if(it >= 5) {
+                // Append D
+                append("D".repeat(if(it >= 5) {
                     val result = resultC / 5
                     resultC -= result * 5
                     result
-                } else 0
+                } else 0))
 
-                // Append Chars
-                append("D".repeat(prependD))
+                // Append C
                 append("C".repeat(resultC))
             }
 
             // Handle Tens
             (
                 if(remainder >= 10) {
-                    val result = remainder / 10
-                    remainder -= result * 10
-                    result
+                    (remainder / 10).apply {
+                        remainder -= this * 10
+                    }
                 }
                 else 0
             ).let {
 
-                // Remainder 10
+                // Remainder Tens
                 var resultX = it
 
-                // Prepend 50
-                var prependL = if(it >= 5) {
-                    val result = resultX / 5
-                    resultX -= result * 5
-                    result
-                } else 0
+                // Append L
+                append("L".repeat(if(it >= 5) {
+                    (resultX / 5).apply {
+                        resultX -= this * 5
+                    }
+                } else 0))
 
-                // Append Chars
-                append("L".repeat(prependL))
+                // Append X
                 append("X".repeat(resultX))
             }
 
