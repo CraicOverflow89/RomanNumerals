@@ -6,80 +6,65 @@ class RomanNumerals {
 
         fun parseInt(input: Int): String = StringBuffer().apply {
 
-            // Define Remainder
-            var remainder = input
+            // Split Digits
+            input.toString().toList().reversed().let {
 
-            // Handle Thousands
-            append("M".repeat((
-                if(remainder >= 1000) {
-                    (remainder / 1000).apply {
-                        remainder -= this * 1000
-                    }
-                }
-                else 0
-            )))
+                // Ones
+                val resultI = if(it.isNotEmpty()) it[0].toString().toInt() else 0
 
-            // Handle Hundreds
-            (
-                if(remainder >= 100) {
-                    (remainder / 100).apply {
-                        remainder -= this * 100
-                    }
-                }
-                else 0
-            ).let {
+                // Tens
+                val resultX = if(it.size > 1) it[1].toString().toInt() else 0
 
-                // Remainder Hundreds
-                var resultC = it
+                // Hundreds
+                val resultC = if(it.size > 2) it[2].toString().toInt() else 0
 
-                // Append D
-                append("D".repeat(if(it >= 5) {
-                    val result = resultC / 5
-                    resultC -= result * 5
-                    result
-                } else 0))
+                // Thousands
+                val resultM = if(it.size > 3) it.subList(3, it.size).reversed().joinToString("").toInt() else 0
 
-                // Append C
-                append("C".repeat(resultC))
+                // DEBUG
+                println("M = $resultM, C = $resultC, X = $resultX, I = $resultI")
+                // NOTE: could abstract logic beneath into a method with three Char arguments
+                //       like [C, D, M], [X, L, C] and [I, V, X]
+
+                // Create Result
+                append("M".repeat(resultM))
+                append(when(resultC) {
+                    9 -> "CM"
+                    8 -> "DCCC"
+                    7 -> "DCC"
+                    6 -> "DC"
+                    5 -> "D"
+                    4 -> "CD"
+                    3 -> "CCC"
+                    2 -> "CC"
+                    1 -> "C"
+                    else -> ""
+                })
+                append(when(resultX) {
+                    9 -> "XC"
+                    8 -> "LXXX"
+                    7 -> "LXX"
+                    6 -> "LX"
+                    5 -> "L"
+                    4 -> "XL"
+                    3 -> "XXX"
+                    2 -> "XX"
+                    1 -> "X"
+                    else -> ""
+                })
+                append(when(resultI) {
+                    9 -> "IX"
+                    8 -> "VIII"
+                    7 -> "VII"
+                    6 -> "VI"
+                    5 -> "V"
+                    4 -> "IV"
+                    3 -> "III"
+                    2 -> "II"
+                    1 -> "I"
+                    else -> ""
+                })
             }
-
-            // Handle Tens
-            (
-                if(remainder >= 10) {
-                    (remainder / 10).apply {
-                        remainder -= this * 10
-                    }
-                }
-                else 0
-            ).let {
-
-                // Remainder Tens
-                var resultX = it
-
-                // Append L
-                append("L".repeat(if(it >= 5) {
-                    (resultX / 5).apply {
-                        resultX -= this * 5
-                    }
-                } else 0))
-
-                // Append X
-                append("X".repeat(resultX))
-            }
-
-            // Handle Remainder
-            append(when(remainder) {
-                9 -> "IX"
-                8 -> "VIII"
-                7 -> "VII"
-                6 -> "VI"
-                5 -> "V"
-                4 -> "IV"
-                3 -> "III"
-                2 -> "II"
-                1 -> "I"
-                else -> ""
-            })
 
         }.toString()
 

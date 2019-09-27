@@ -6,7 +6,6 @@ fun main(args: Array<String>) {
     val inputInt = 1984
     println("int = $inputInt")
     println(RomanNumerals.parseInt(inputInt))
-    // NOTE: missing logic for when 19xx should be MCM (currently results in MDCCCC)
 
     // Test: Numerals to Int
     //val inputNumerals = "MMMCDXXLV"
