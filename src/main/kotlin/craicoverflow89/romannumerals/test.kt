@@ -8,8 +8,8 @@ fun main(args: Array<String>) {
     println(RomanNumerals.parseInt(inputInt))
 
     // Test: Numerals to Int
-    val inputNumerals = "MMMCDXXLV"
-    println("RomanNumerals = $inputNumerals")
+    //val inputNumerals = "MMMCDXXLV"
+    //println("RomanNumerals = $inputNumerals")
     //println(RomanNumerals.parseNumeral(inputNumerals))
 
 }

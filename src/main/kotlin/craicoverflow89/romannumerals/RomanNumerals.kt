@@ -10,59 +10,38 @@ class RomanNumerals {
             var remainder = input
 
             // Handle Thousands
-            (
+            append("M".repeat((
                 if(remainder >= 1000) {
-                    val result = remainder / 1000
-                    remainder -= result * 1000
-                    result
+                    (remainder / 1000).apply {
+                        remainder -= this * 1000
+                    }
                 }
                 else 0
-            ).let {
-
-                // Remainder 1000
-                var resultM = it
-                println("M result is $it")
-
-                // Prepend 1000
-                var prependD = if(it >= 5) {
-                    val result = resultM / 5
-                    resultM -= result * 5
-                    result
-                } else 0
-
-                // Append Chars
-                append("D".repeat(prependD))
-                append("M".repeat(resultM))
-                val appendD = 0
-                append("D".repeat(appendD))
-            }
+            )))
 
             // Handle Hundreds
             (
                 if(remainder >= 100) {
-                    val result = remainder / 100
-                    remainder -= result * 100
-                    result
+                    (remainder / 100).apply {
+                        remainder -= this * 100
+                    }
                 }
                 else 0
             ).let {
 
                 // Remainder 100
                 var resultC = it
-                println("C result is $it")
 
-                // Prepend 100
-                var prependL = if(it >= 5) {
+                // Prepend 500
+                var prependD = if(it >= 5) {
                     val result = resultC / 5
                     resultC -= result * 5
                     result
                 } else 0
 
                 // Append Chars
-                append("L".repeat(prependL))
+                append("D".repeat(prependD))
                 append("C".repeat(resultC))
-                val appendL = 0
-                append("L".repeat(appendL))
             }
 
             // Handle Tens
@@ -77,28 +56,32 @@ class RomanNumerals {
 
                 // Remainder 10
                 var resultX = it
-                println("X result is $it")
 
-                // Prepend 10
-                var prependV = if(it >= 5) {
+                // Prepend 50
+                var prependL = if(it >= 5) {
                     val result = resultX / 5
                     resultX -= result * 5
                     result
                 } else 0
 
                 // Append Chars
-                append("V".repeat(prependV))
+                append("L".repeat(prependL))
                 append("X".repeat(resultX))
-                val appendV = 0
-                append("V".repeat(appendV))
             }
 
             // Handle Remainder
-            remainder.let {
-                println("I result is $it")
-                append("I".repeat(it))
-            }
-            // NOTE: need to take count into account here and turn multiple I..?
+            append(when(remainder) {
+                9 -> "IX"
+                8 -> "VIII"
+                7 -> "VII"
+                6 -> "VI"
+                5 -> "V"
+                4 -> "IV"
+                3 -> "III"
+                2 -> "II"
+                1 -> "I"
+                else -> ""
+            })
 
         }.toString()
 
@@ -108,6 +91,7 @@ class RomanNumerals {
 
         // Validate Tokens
         if("^[MDCLXVI]+\$".toRegex().find(input) == null) throw Exception("Input char string is invalid!")
+        // NOTE: could improve Regex to check stuff like D not appearing after CLXVI and suchlike
 
         // TEMP
         return 0
