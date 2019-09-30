@@ -34,4 +34,31 @@ class RomanNumeralsTest {
         RomanNumerals.parseInt(-1)
     }
 
+    @Test
+    fun parseNumeral1() = with(fun(input: String, expected: Int) {
+        Assert.assertEquals(expected, RomanNumerals.parseNumeral(input))
+    }) {
+        this("", 0)
+        this("VII", 7)
+        this("IX", 9)
+        this("X", 10)
+        this("XIII", 13)
+        this("XXII", 22)
+        this("XXIX", 29)
+        this("XLI", 41)
+        this("LVIII", 58)
+        this("LXIX", 69)
+        this("LXXXIV", 84)
+        this("CXVII", 117)
+        this("CDXCVI", 496)
+        this("DCCCLIX", 859)
+        this("MCCCI", 1301)
+        this("MCMLXXXIX", 1989)
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun parseNumeral2() {
+        RomanNumerals.parseNumeral("")
+    }
+
 }
