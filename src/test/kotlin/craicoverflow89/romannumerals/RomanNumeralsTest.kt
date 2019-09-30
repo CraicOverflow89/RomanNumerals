@@ -61,4 +61,14 @@ class RomanNumeralsTest {
         RomanNumerals.parseNumeral("")
     }
 
+    @Test(expected = IllegalArgumentException::class)
+    fun parseNumeral3() {
+        RomanNumerals.parseNumeral("A")
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun parseNumeral4() {
+        RomanNumerals.parseNumeral("CMC")
+    }
+
 }

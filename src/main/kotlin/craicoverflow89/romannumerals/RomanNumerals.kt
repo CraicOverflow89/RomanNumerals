@@ -48,16 +48,16 @@ class RomanNumerals {
 
         }.toString()
 
-    }
+        fun parseNumeral(input: String): Int {
 
-    fun parseNumeral(input: String): Int {
+            // Validate Tokens
+            requireNotNull("^[MDCLXVI]+\$".toRegex().find(input)) {"Input char string is invalid!"}
+            // NOTE: could improve Regex to check stuff like D not appearing after CLXVI and suchlike
 
-        // Validate Tokens
-        if("^[MDCLXVI]+\$".toRegex().find(input) == null) throw Exception("Input char string is invalid!")
-        // NOTE: could improve Regex to check stuff like D not appearing after CLXVI and suchlike
+            // TEMP
+            return 0
+        }
 
-        // TEMP
-        return 0
     }
 
 }
