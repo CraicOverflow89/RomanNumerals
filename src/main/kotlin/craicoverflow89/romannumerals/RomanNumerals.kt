@@ -4,6 +4,13 @@ class RomanNumerals {
 
     companion object {
 
+        /**
+         * Creates a Roman Numeral representation of an integer
+         *
+         * @param input the integer to convert
+         * @return string representation
+         * @throws IllegalArgumentException if input is not a positive integer
+         */
         fun parseInt(input: Int): String = StringBuffer().apply {
 
             // Validate Input
@@ -48,11 +55,30 @@ class RomanNumerals {
 
         }.toString()
 
+        /**
+         * Determines an integer from a Roman Numeral representation
+         *
+         * @param input the string to convert
+         * @return integer result
+         * @throws IllegalArgumentException if input contains invalid tokens or structures
+         */
         fun parseNumeral(input: String): Int {
 
             // Validate Tokens
-            requireNotNull("^[MDCLXVI]+\$".toRegex().find(input)) {"Input char string is invalid!"}
-            // NOTE: could improve Regex to check stuff like D not appearing after CLXVI and suchlike
+            requireNotNull("^[MDCLXVI]+\$".toRegex().find(input)) {"Input char string contains an invalid token!"}
+
+            // Validate Structure
+            listOf("CM+C", "[XVI]+D").forEach {
+                require(it.toRegex().find(input) == null) {"Input char string contains an invalid structure!"}
+            }
+            // NOTE: could improve Regex to check stuff like C not appearing before and after M and suchlike
+            // NOTE: could improve Regex to check stuff like D not appearing after CLXVI or before M and suchlike
+
+            // Handle Thousands
+            // NOTE: if C+M+ then M * 1000 - C * 100
+            //       else if M+C+ then M * 1000 + C * 100
+            //       else M+ then M * 1000
+            //       also need to do the same with D
 
             // TEMP
             return 0
