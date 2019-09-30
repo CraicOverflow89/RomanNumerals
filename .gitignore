@@ -1,6 +1,7 @@
 .gradle
 .idea
 gradle
-out
 gradlew
 gradlew.bat
+out
+src/main/kotlin/craicoverflow89/romannumerals/test.kt
