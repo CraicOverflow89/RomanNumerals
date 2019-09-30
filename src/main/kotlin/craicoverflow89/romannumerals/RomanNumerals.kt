@@ -21,49 +21,26 @@ class RomanNumerals {
                 // Thousands
                 val resultM = if(it.size > 3) it.subList(3, it.size).reversed().joinToString("").toInt() else 0
 
-                // DEBUG
-                println("M = $resultM, C = $resultC, X = $resultX, I = $resultI")
-                // NOTE: could abstract logic beneath into a method with three Char arguments
-                //       like [C, D, M], [X, L, C] and [I, V, X]
-
                 // Create Result
                 append("M".repeat(resultM))
-                append(when(resultC) {
-                    9 -> "CM"
-                    8 -> "DCCC"
-                    7 -> "DCC"
-                    6 -> "DC"
-                    5 -> "D"
-                    4 -> "CD"
-                    3 -> "CCC"
-                    2 -> "CC"
-                    1 -> "C"
-                    else -> ""
-                })
-                append(when(resultX) {
-                    9 -> "XC"
-                    8 -> "LXXX"
-                    7 -> "LXX"
-                    6 -> "LX"
-                    5 -> "L"
-                    4 -> "XL"
-                    3 -> "XXX"
-                    2 -> "XX"
-                    1 -> "X"
-                    else -> ""
-                })
-                append(when(resultI) {
-                    9 -> "IX"
-                    8 -> "VIII"
-                    7 -> "VII"
-                    6 -> "VI"
-                    5 -> "V"
-                    4 -> "IV"
-                    3 -> "III"
-                    2 -> "II"
-                    1 -> "I"
-                    else -> ""
-                })
+                with(fun(result: Int, a: Char, b: Char, c: Char) {
+                    append(when(result) {
+                        9 -> "$a$c"
+                        8 -> "$b$a$a$a"
+                        7 -> "$b$a$a"
+                        6 -> "$b$a"
+                        5 -> b
+                        4 -> "$a$b"
+                        3 -> "$a$a$a"
+                        2 -> "$a$a"
+                        1 -> a
+                        else -> ""
+                    })
+                }) {
+                    this(resultC, 'C', 'D', 'M')
+                    this(resultX, 'X', 'L', 'C')
+                    this(resultI, 'I', 'V', 'X')
+                }
             }
 
         }.toString()
