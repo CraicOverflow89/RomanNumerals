@@ -1,9 +1,9 @@
 package craicoverflow89.romannumerals
 
+import java.lang.IllegalArgumentException
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 import org.junit.Test
-import java.lang.IllegalArgumentException
 
 class RomanNumeralsTest {
 
