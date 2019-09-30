@@ -3,11 +3,12 @@ package craicoverflow89.romannumerals
 import org.hamcrest.CoreMatchers
 import org.junit.Assert
 import org.junit.Test
+import java.lang.IllegalArgumentException
 
 class RomanNumeralsTest {
 
     @Test
-    fun parseInt() = with(fun(input: Int, expected: String) {
+    fun parseInt1() = with(fun(input: Int, expected: String) {
         Assert.assertEquals(expected, RomanNumerals.parseInt(input))
     }) {
         this(0, "")
@@ -26,6 +27,11 @@ class RomanNumeralsTest {
         this(859, "DCCCLIX")
         this(1301, "MCCCI")
         this(1989, "MCMLXXXIX")
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun parseInt2() {
+        RomanNumerals.parseInt(-1)
     }
 
 }

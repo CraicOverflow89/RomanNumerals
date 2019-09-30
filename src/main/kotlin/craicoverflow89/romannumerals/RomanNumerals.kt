@@ -6,6 +6,9 @@ class RomanNumerals {
 
         fun parseInt(input: Int): String = StringBuffer().apply {
 
+            // Validate Input
+            require(input >= 0) {"The input parameter must be a positive integer!"}
+
             // Split Digits
             input.toString().toList().reversed().let {
 
